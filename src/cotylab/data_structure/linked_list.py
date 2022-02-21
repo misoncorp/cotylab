@@ -1,7 +1,3 @@
-
-from email.mime import base
-
-
 class Node:
     def __init__(self, value=None):
         self.value = value
@@ -19,6 +15,7 @@ class DoubledNode(Node):
 
 class LinkedList:
     NODE_CLASS = Node
+    DELIMITER = ' -> '
 
     def __init__(self, data=[]):
         self.head = None
@@ -86,17 +83,24 @@ class LinkedList:
     def set_current(self, node):
         self.current = node
 
+    def go_to_head(self):
+        self.set_current(self.head)
+
+    def go_to_tail(self):
+        self.set_current(self.tail)
+
     def __str__(self):
         values = []
         current_node = self.head
         while current_node is not None:
             values.append(str(current_node.value))
             current_node = current_node.next
-        return ' -> '.join(values)
+        return self.DELIMITER.join(values)
 
 
 class DoubledLinkedList(LinkedList):
     NODE_CLASS = DoubledNode
+    DELIMITER = ' <-> '
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
